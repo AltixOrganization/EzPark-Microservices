@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.altix.ezpark</groupId>
+        <artifactId>ezpark-microservices-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>reservation-api-contracts</artifactId>
+    <name>reservation-api-contracts</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.altix.ezpark</groupId>
+            <artifactId>shared-domain-model</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <!-- ******************************************************************************** -->
+        <!-- Si los DTOs o eventos de RESERVATION-API-CONTRACTS necesitan clases de OTROS módulos de contrato,
+             descomenta estas dependencias. Por ejemplo: -->
+        <!--
+        <dependency>
+            <groupId>com.altix.ezpark</groupId>
+            <artifactId>iam-api-contracts</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.altix.ezpark</groupId>
+            <artifactId>profile-api-contracts</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.altix.ezpark</groupId>
+            <artifactId>vehicle-api-contracts</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.altix.ezpark</groupId>
+            <artifactId>parking-api-contracts</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        -->
+        <!-- ******************************************************************************** -->
+    </dependencies>
+</project>

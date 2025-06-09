@@ -1,0 +1,4 @@
+com\altix\ezpark\shared\domain\model\aggregates\AuditableAbstractCategory.class
+com\altix\ezpark\shared\domain\model\entities\AuditableModel.class
+com\altix\ezpark\shared\domain\events\DomainEvent.class
+com\altix\ezpark\shared\domain\model\aggregates\AuditableAbstractAggregateRoot.class

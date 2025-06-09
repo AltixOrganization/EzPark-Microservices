@@ -1,0 +1,7 @@
+C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\shared-infrastructure\src\main\java\com\altix\ezpark\shared\config\WebConfig.java
+C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\shared-infrastructure\src\main\java\com\altix\ezpark\shared\config\KafkaBaseConfig.java
+C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\shared-infrastructure\src\main\java\com\altix\ezpark\shared\infrastructure\messaging\KafkaEventPublisher.java
+C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\shared-infrastructure\src\main\java\com\altix\ezpark\shared\infrastructure\messaging\ResponseRegistry.java
+C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\shared-infrastructure\src\main\java\com\altix\ezpark\shared\infrastructure\persistence\jpa\configuration\strategy\SnakeCaseWithPluralizedTablePhysicalNamingStrategy.java
+C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\shared-infrastructure\src\main\java\com\altix\ezpark\shared\infrastructure\documentation\openapi\configuration\OpenApiConfiguration.java
+C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\shared-infrastructure\src\main\java\com\altix\ezpark\shared\config\JacksonConfig.java

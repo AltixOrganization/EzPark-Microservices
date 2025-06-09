@@ -1,0 +1,10 @@
+com\altix\ezpark\reservations\application\dtos\ReservationCommandRequest.class
+com\altix\ezpark\reservations\interfaces\rest\resources\UpdateStatusResource.class
+com\altix\ezpark\reservations\application\dtos\ReservationValidationResponse.class
+com\altix\ezpark\reservations\interfaces\rest\resources\UpdateReservationResource.class
+com\altix\ezpark\reservations\interfaces\rest\resources\CreateReservationResource.class
+com\altix\ezpark\reservations\application\dtos\ReservationCommandResponse.class
+com\altix\ezpark\reservations\infrastructure\messaging\ReservationKafkaConfig.class
+com\altix\ezpark\reservations\application\dtos\CommandType.class
+com\altix\ezpark\reservations\application\dtos\ReservationValidationRequest.class
+com\altix\ezpark\reservations\interfaces\rest\resources\ReservationResource.class

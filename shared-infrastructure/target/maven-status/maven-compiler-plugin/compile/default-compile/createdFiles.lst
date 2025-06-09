@@ -1,0 +1,8 @@
+com\altix\ezpark\shared\config\WebConfig.class
+com\altix\ezpark\shared\config\WebConfig$1.class
+com\altix\ezpark\shared\infrastructure\messaging\ResponseRegistry.class
+com\altix\ezpark\shared\config\JacksonConfig.class
+com\altix\ezpark\shared\config\KafkaBaseConfig.class
+com\altix\ezpark\shared\infrastructure\documentation\openapi\configuration\OpenApiConfiguration.class
+com\altix\ezpark\shared\infrastructure\persistence\jpa\configuration\strategy\SnakeCaseWithPluralizedTablePhysicalNamingStrategy.class
+com\altix\ezpark\shared\infrastructure\messaging\KafkaEventPublisher.class

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.altix.ezpark</groupId>
+        <artifactId>ezpark-microservices-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath> <!-- Ruta relativa al pom.xml padre global -->
+    </parent>
+    <artifactId>shared-api-resources</artifactId>
+    <name>shared-api-resources</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Para Lombok (si ErrorResource o MessageResource lo usan, lo cual es probable) -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Si estas clases utilizan anotaciones de validación (ej. @NotNull, @Size), necesitarán esta API -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
+        <!-- Si estas clases utilizan anotaciones de Spring (ej. @JsonInclude en DTOs o @Configuration en utilidades),
+             el spring-boot-starter (scope provided) sería suficiente. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Si estas clases utilizan Jackson para la serialización/deserialización,
+             esta dependencia podría ser útil. Sin embargo, a menudo la provee el servicio que las usa. -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,7 @@
+com\altix\ezpark\iam\interfaces\rest\resources\SignInResource.class
+com\altix\ezpark\iam\infrastructure\messaging\IamKafkaConfig.class
+com\altix\ezpark\iam\application\dtos\UserSignedUpEvent.class
+com\altix\ezpark\iam\interfaces\rest\resources\UserResource.class
+com\altix\ezpark\iam\interfaces\rest\resources\RoleResource.class
+com\altix\ezpark\iam\interfaces\rest\resources\SignUpResource.class
+com\altix\ezpark\iam\interfaces\rest\resources\AuthenticatedUserResource.class

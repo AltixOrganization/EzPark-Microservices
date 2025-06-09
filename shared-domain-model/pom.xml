@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.altix.ezpark</groupId>
+        <artifactId>ezpark-microservices-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath> <!-- Ruta relativa al pom.xml padre global -->
+    </parent>
+    <artifactId>shared-domain-model</artifactId>
+    <name>shared-domain-model</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Para las anotaciones JPA como @Entity, @MappedSuperclass, etc. -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+        </dependency>
+
+        <!-- Para Lombok (si AuditableAbstractAggregateRoot, AuditableModel, DomainEvent, etc. lo usan) -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Boot Starter básico, para anotaciones como @Getter, @Setter de Lombok
+             si se necesitan (aunque se suelen resolver por el compilador). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- *************************************************************** -->
+        <!-- ¡SOLUCIÓN! Añadir Spring Data JPA -->
+        <!-- Necesario para @CreatedDate, @LastModifiedDate, AuditingEntityListener, AbstractAggregateRoot -->
+        <!-- *************************************************************** -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <!-- No se especifica la versión, se hereda de spring-boot-dependencies en el padre -->
+        </dependency>
+        <!-- También puedes usar spring-boot-starter-data-jpa, pero spring-data-jpa es más ligero si solo necesitas las APIs -->
+        <!-- Si tienes dependencias en el monolito a spring-boot-starter-data-jpa, podrías considerar ponerlo en 'provided' -->
+        <!-- para este módulo de contrato, ya que el servicio final es quien lo "proveerá" y hará la implementación completa. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <scope>provided</scope> <!-- Usa 'provided' para que este módulo no empaquete toda JPA, sino que el servicio final lo haga -->
+        </dependency>
+
+
+    </dependencies>
+</project>

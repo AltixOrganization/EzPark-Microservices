@@ -1,0 +1,13 @@
+com\altix\ezpark\vehicles\interfaces\rest\resources\CreateModelResource.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\BrandWithModelResource.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\UpdateModelResource.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\VehicleResource.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\UpdateBrandResource.class
+com\altix\ezpark\vehicles\infrastructure\messaging\VehicleKafkaConfig.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\CreateBrandResource.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\UpdateVehicleResource.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\BrandWithModelListResource.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\CreateVehicleResource.class
+com\altix\ezpark\vehicles\application\dtos\VehicleValidationResponse.class
+com\altix\ezpark\vehicles\interfaces\rest\resources\ModelResource.class
+com\altix\ezpark\vehicles\application\dtos\VehicleValidationRequest.class
