@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- *************************************************************** -->
+    <!-- CAMBIO #1: Cambiar el PARENT para que apunte a tu padre global -->
+    <!-- *************************************************************** -->
+    <parent>
+        <groupId>com.altix.ezpark</groupId>              <!-- El GroupId de tu padre global -->
+        <artifactId>ezpark-microservices-parent</artifactId> <!-- El ArtifactId de tu padre global -->
+        <version>0.0.1-SNAPSHOT</version>                 <!-- La versión de tu padre global -->
+        <relativePath>../pom.xml</relativePath>           <!-- ¡IMPORTANTE! Ruta relativa al pom.xml padre global -->
+        <!-- Asumiendo que config-server/ está al lado de Microservicios/pom.xml -->
+    </parent>
+
+    <groupId>com.altix.ezpark</groupId>               <!-- Mantienes tu GroupId -->
+    <artifactId>config-server</artifactId>            <!-- Mantienes tu ArtifactId -->
+    <!-- <version>0.0.1-SNAPSHOT</version> -->         <!-- CAMBIO #2: La versión ya se hereda del padre, puedes eliminarla -->
+    <name>config-server</name>
+    <description>Configuration Server</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
