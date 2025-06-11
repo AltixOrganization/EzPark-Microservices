@@ -76,6 +76,7 @@
 
         <!-- Microservicios de Negocio -->
         <module>vehicle-service</module>
+        <module>profile-service</module>
         <!--<module>iam-service</module>-->
         <!--<module>profile-service</module>-->
     </modules>
