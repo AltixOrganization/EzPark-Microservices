@@ -1,6 +1,0 @@
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\profile-api-contracts\src\main\java\com\altix\ezpark\profiles\application\dtos\ProfileValidationRequest.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\profile-api-contracts\src\main\java\com\altix\ezpark\profiles\application\dtos\ProfileValidationResponse.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\profile-api-contracts\src\main\java\com\altix\ezpark\profiles\infrastructure\messaging\ProfileKafkaConfig.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\profile-api-contracts\src\main\java\com\altix\ezpark\profiles\interfaces\rest\resources\CreateProfileResource.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\profile-api-contracts\src\main\java\com\altix\ezpark\profiles\interfaces\rest\resources\ProfileResource.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\profile-api-contracts\src\main\java\com\altix\ezpark\profiles\interfaces\rest\resources\UpdateProfileResource.java

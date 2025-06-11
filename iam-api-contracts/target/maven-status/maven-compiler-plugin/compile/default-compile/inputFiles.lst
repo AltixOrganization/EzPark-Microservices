@@ -1,7 +1,0 @@
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\iam-api-contracts\src\main\java\com\altix\ezpark\iam\application\dtos\UserSignedUpEvent.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\iam-api-contracts\src\main\java\com\altix\ezpark\iam\interfaces\rest\resources\AuthenticatedUserResource.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\iam-api-contracts\src\main\java\com\altix\ezpark\iam\interfaces\rest\resources\RoleResource.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\iam-api-contracts\src\main\java\com\altix\ezpark\iam\interfaces\rest\resources\SignInResource.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\iam-api-contracts\src\main\java\com\altix\ezpark\iam\infrastructure\messaging\IamKafkaConfig.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\iam-api-contracts\src\main\java\com\altix\ezpark\iam\interfaces\rest\resources\SignUpResource.java
-C:\Users\Amner\Documents\GitHub\2025-10\EzPark\Microservicios\iam-api-contracts\src\main\java\com\altix\ezpark\iam\interfaces\rest\resources\UserResource.java
