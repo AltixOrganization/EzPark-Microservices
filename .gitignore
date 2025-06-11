@@ -1,2 +1,93 @@
-.idea
-.qodo
+# Directorios de compilación de Maven
+target/
+# Si alguna vez usas Gradle:
+build/
+
+# IDEs
+.idea/                          # Directorio de IntelliJ IDEA
+.qodo/                          # Directorio detectado (puede ser otro IDE o herramienta)
+*.iml                           # Archivos de módulo de IntelliJ (para proyectos multi-módulo)
+.vscode/                        # Si usas VS Code
+.project                        # Eclipse
+.classpath                      # Eclipse
+.settings/                      # Eclipse
+
+# Logs
+*.log
+logs/
+*.json.log # Si generas logs en JSON
+
+# Archivos de configuración de sistema operativo
+.DS_Store                       # macOS
+Thumbs.db                       # Windows
+ehthumbs.db                     # Windows
+.directory                      # Linux (KDE)
+
+# Archivos de paquetes de sistema operativo
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Archivos de configuración de Spring Boot
+# No versiones estos si contienen secretos o son específicos de entorno local
+# Para credenciales de DB, usa los placeholders ${...} y configura Config Server.
+# Si tienes archivos .env locales que no deben ir al repo:
+.env
+.env.*
+application*.properties # No versiones archivos de propiedades que contengan secretos
+application*.yml        # No versiones archivos YAML que contengan secretos
+
+# Archivos de empaquetado (WARs, EARs)
+*.war
+*.ear
+
+# Dependencias locales de Maven (si las copias en el proyecto, lo cual no es ideal)
+lib/
+
+# Resultados de pruebas o reportes
+test-output/
+surefire-reports/
+failsafe-reports/
+
+# Clases compiladas
+*.class
+
+# Datos temporales generados
+tmp/
+temp/
+
+# Caché de JVM
+hs_err_pid*.log
+
+# Docker
+.dockerignore
+
+# Archivos del IDE VS Code (para proyectos multi-módulo)
+.vscode/
+
+# Historial de comandos de shell
+.bash_history
+.zsh_history
+.fish_history
+
+# Archivos de datos SQLite (si usas SQLite para pruebas o desarrollo local y no quieres versionar la DB)
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de depuración y dumps de memoria
+*.hprof
+*.dump
+
+# Archivos de sistema operativo (más generales)
+*~                      # Archivos de respaldo de editores (como vim)
+#*#                     # Más archivos de respaldo
+
+# Archivos de compilación de Android Studio (si tuvieras módulos Android en el futuro)
+.gradle/
+local.properties
+.externalNativeBuild/
+.cxx/
+build/
+captures/

@@ -5,14 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.altix.ezpark</groupId>
-    <artifactId>ezpark-microservices-parent</artifactId> <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging> <properties>
+    <artifactId>ezpark-microservices-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
         <java.version>17</java.version>
         <spring-boot.version>3.2.5</spring-boot.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <lombok.version>1.18.30</lombok.version>
+        <springdoc.version>2.3.0</springdoc.version>
+        <spring-kafka.version>3.1.6</spring-kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -31,29 +36,48 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
+        <!-- Módulos de Infraestructura Compartida -->
+        <module>shared-infrastructure</module>
+        <module>shared-domain-model</module>
+        <module>shared-api-resources</module>
 
-    <module>shared-infrastructure</module> 
-
-    <!-- Microservicios de Infraestructura -->
-    <module>discovery-server</module>
-    <module>api-gateway</module>
-    
-    <!-- Microservicios de Negocio (cuando los extraigas)
-    <module>iam-service</module>
-    <module>profile-service</module>-->
-    <module>shared-domain-model</module>
-    <module>shared-api-resources</module>
+        <!-- Módulos de Contrato por Bounded Context -->
         <module>iam-api-contracts</module>
         <module>profile-api-contracts</module>
         <module>vehicle-api-contracts</module>
         <module>parking-api-contracts</module>
         <module>reservation-api-contracts</module>
         <module>payment-api-contracts</module>
+
+        <!-- Microservicios de Infraestructura -->
         <module>config-server</module>
+        <module>discovery-server</module>
+        <module>api-gateway</module>
+
+        <!-- Microservicios de Negocio -->
+        <module>vehicle-service</module>
+        <!--<module>iam-service</module>-->
+        <!--<module>profile-service</module>-->
     </modules>
 
     <build>
@@ -73,6 +97,11 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
             </plugin>
         </plugins>
     </build>
