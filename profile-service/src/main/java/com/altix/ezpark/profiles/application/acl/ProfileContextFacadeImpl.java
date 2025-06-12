@@ -1,10 +1,10 @@
 package com.altix.ezpark.profiles.application.acl;
 //
-//import com.ezpark.web_service.profiles.domain.model.commands.CreateProfileCommand;
-//import com.ezpark.web_service.profiles.domain.model.queries.GetProfileByIdQuery;
-//import com.ezpark.web_service.profiles.domain.services.ProfileCommandService;
-//import com.ezpark.web_service.profiles.domain.services.ProfileQueryService;
-//import com.ezpark.web_service.parkings.application.internal.outboundservices.acl.ProfileContextFacade;
+//import com.altix.ezpark.profiles.domain.model.commands.CreateProfileCommand;
+//import com.altix.ezpark.profiles.domain.model.queries.GetProfileByIdQuery;
+//import com.altix.ezpark.profiles.domain.services.ProfileCommandService;
+//import com.altix.ezpark.profiles.domain.services.ProfileQueryService;
+//import com.altix.ezpark.parkings.application.internal.outboundservices.acl.ProfileContextFacade;
 //import org.springframework.stereotype.Service;
 //
 //import java.time.LocalDate;

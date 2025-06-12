@@ -1,0 +1,3 @@
+package com.altix.ezpark.reservations.domain.model.queries;
+
+public record GetReservationByIdQuery(Long reservationId) { }

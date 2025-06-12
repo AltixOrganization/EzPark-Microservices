@@ -1,6 +1,5 @@
 package com.altix.ezpark.profiles.interfaces.rest.transformers;
 
-
 import com.altix.ezpark.profiles.domain.model.commands.CreateProfileCommand;
 import com.altix.ezpark.profiles.interfaces.rest.resources.CreateProfileResource;
 
