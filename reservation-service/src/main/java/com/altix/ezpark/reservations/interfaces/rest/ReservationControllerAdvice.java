@@ -1,7 +1,7 @@
 package com.altix.ezpark.reservations.interfaces.rest;
 
+import com.altix.ezpark.interfaces.rest.resources.ErrorResource;
 import com.altix.ezpark.reservations.domain.model.exceptions.*;
-import com.altix.ezpark.shared.interfaces.rest.resources.ErrorResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;

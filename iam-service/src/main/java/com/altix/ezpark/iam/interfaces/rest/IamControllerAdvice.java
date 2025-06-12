@@ -1,7 +1,7 @@
-package com.altix.ezpark.parkings.interfaces.rest;
+package com.altix.ezpark.iam.interfaces.rest;
 
+import com.altix.ezpark.iam.domain.model.exceptions.*;
 import com.altix.ezpark.interfaces.rest.resources.ErrorResource;
-import com.altix.ezpark.parkings.domain.model.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
@@ -13,65 +13,56 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.altix.ezpark.parkings.infrastructure.utils.ParkingErrorCatalog.*;
+import static com.altix.ezpark.iam.infrastructure.utils.IamErrorCatalog.*;
 
-
-@RestControllerAdvice(basePackages = "com.altix.ezpark.parkings")
-public class ParkingControllerAdvice {
+@RestControllerAdvice(basePackages = "com.altix.ezpark.iam")
+public class IamControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ParkingNotFoundException.class)
-    public ErrorResource handleParkingNotFoundException() {
+    @ExceptionHandler(UserNotFoundException.class)
+    public ErrorResource handleUserNotFoundException() {
         ErrorResource response = new ErrorResource();
-        response.setCode(PARKING_NOT_FOUND.getCode());
-        response.setMessage(PARKING_NOT_FOUND.getMessage());
+        response.setCode(USER_NOT_FOUND.getCode());
+        response.setMessage(USER_NOT_FOUND.getMessage());
         response.setTimeStamp(LocalDateTime.now());
         return response;
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ScheduleNotFoundException.class)
-    public ErrorResource handleScheduleNotFoundException() {
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ErrorResource handleRoleNotFoundException() {
         ErrorResource response = new ErrorResource();
-        response.setCode(SCHEDULE_NOT_FOUND.getCode());
-        response.setMessage(SCHEDULE_NOT_FOUND.getMessage());
+        response.setCode(ROLE_NOT_FOUND.getCode());
+        response.setMessage(ROLE_NOT_FOUND.getMessage());
         response.setTimeStamp(LocalDateTime.now());
         return response;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(LocationNotFoundException.class)
-    public ErrorResource handleLocationNotFoundException() {
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ErrorResource handleInvalidCredentialsException() {
         ErrorResource response = new ErrorResource();
-        response.setCode(LOCATION_NOT_FOUND.getCode());
-        response.setMessage(LOCATION_NOT_FOUND.getMessage());
+        response.setCode(INVALID_CREDENTIALS.getCode());
+        response.setMessage(INVALID_CREDENTIALS.getMessage());
         response.setTimeStamp(LocalDateTime.now());
         return response;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ProfileNotFoundException.class)
-    public ErrorResource handleProfileNotFoundException() {
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ErrorResource handleUsernameAlreadyExistsException() {
         ErrorResource response = new ErrorResource();
-        response.setCode(PROFILE_NOT_FOUND.getCode());
-        response.setMessage(PROFILE_NOT_FOUND.getMessage());
+        response.setCode(USERNAME_ALREADY_EXISTS.getCode());
+        response.setMessage(USERNAME_ALREADY_EXISTS.getMessage());
         response.setTimeStamp(LocalDateTime.now());
         return response;
     }
 
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    @ExceptionHandler({ParkingUpdateException.class, LocationUpdateException.class, ScheduleUpdateException.class})
-    public ErrorResource handleUpdateExceptions(Exception ex) {
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ErrorResource handleEmailAlreadyExistsException() {
         ErrorResource response = new ErrorResource();
-        if (ex instanceof ParkingUpdateException) {
-            response.setCode(PARKING_UPDATE_ERROR.getCode());
-            response.setMessage(PARKING_UPDATE_ERROR.getMessage());
-        } else if (ex instanceof LocationUpdateException) {
-            response.setCode(LOCATION_UPDATE_ERROR.getCode());
-            response.setMessage(LOCATION_UPDATE_ERROR.getMessage());
-        } else {
-            response.setCode(SCHEDULE_UPDATE_ERROR.getCode());
-            response.setMessage(SCHEDULE_UPDATE_ERROR.getMessage());
-        }
+        response.setCode(EMAIL_ALREADY_EXISTS.getCode());
+        response.setMessage(EMAIL_ALREADY_EXISTS.getMessage());
         response.setTimeStamp(LocalDateTime.now());
         return response;
     }
@@ -105,9 +96,6 @@ public class ParkingControllerAdvice {
         return response;
     }
 
-
-
-    // generic errors
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ErrorResource handleGenericException(Exception exception) {

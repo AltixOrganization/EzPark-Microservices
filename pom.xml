@@ -18,6 +18,7 @@
         <lombok.version>1.18.30</lombok.version>
         <springdoc.version>2.3.0</springdoc.version>
         <spring-kafka.version>3.1.6</spring-kafka.version>
+        <jwt.version>0.12.3</jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -52,6 +53,21 @@
                 <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
                 <version>${springdoc.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -80,8 +96,7 @@
         <module>parking-service</module>
         <module>reservation-service</module>
         <module>payment-service</module>
-        <!--<module>iam-service</module>-->
-        <!--<module>profile-service</module>-->
+        <module>iam-service</module>
     </modules>
 
     <build>
