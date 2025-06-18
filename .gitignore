@@ -87,5 +87,5 @@ hs_err_pid*.log
 local.properties
 .externalNativeBuild/
 .cxx/
-build/
+
 captures/
