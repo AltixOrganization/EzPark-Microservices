@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/models")
+@RequestMapping(value = "api/v1/models")
 public class ModelController {
     private ModelCommandService modelCommandService;
 

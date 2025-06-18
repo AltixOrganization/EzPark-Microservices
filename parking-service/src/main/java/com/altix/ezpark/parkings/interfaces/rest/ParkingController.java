@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/parking")
+@RequestMapping(value = "api/v1/parking")
 @Tag(name = "Parking", description = "Parking Management Endpoints")
 public class ParkingController {
     private final ParkingCommandService parkingCommandService;

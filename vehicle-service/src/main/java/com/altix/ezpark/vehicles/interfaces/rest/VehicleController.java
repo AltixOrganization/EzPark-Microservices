@@ -20,7 +20,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/vehicles")
+@RequestMapping(value = "api/v1/vehicles")
 public class VehicleController {
 
     private final VehicleQueryService vehicleQueryService;

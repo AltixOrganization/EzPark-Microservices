@@ -10,6 +10,7 @@ import com.altix.ezpark.vehicles.interfaces.rest.resources.UpdateBrandResource;
 import com.altix.ezpark.vehicles.interfaces.rest.transform.BrandResourceFromEntityAssembler;
 import com.altix.ezpark.vehicles.interfaces.rest.transform.CreateBrandCommandFromResourceAssembler;
 import com.altix.ezpark.vehicles.interfaces.rest.transform.UpdateBrandCommandFromResourceAssembler;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/brands")
+@RequestMapping(value = "api/v1/brands")
+@Tag(name = "Brand", description = "Brand Management Endpoints")
 public class BrandController {
     private BrandCommandService brandCommandService;
     private BrandQueryService brandQueryService;

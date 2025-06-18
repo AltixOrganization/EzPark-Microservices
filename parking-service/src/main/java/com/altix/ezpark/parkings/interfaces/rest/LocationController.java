@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/location")
+@RequestMapping(value = "api/v1/location")
 @Tag(name = "Location", description = "Location Management Endpoints")
 public class LocationController {
     private final LocationCommandService locationCommandService;

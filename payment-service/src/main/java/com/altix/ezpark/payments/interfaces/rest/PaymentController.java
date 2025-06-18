@@ -17,7 +17,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/payments")
+@RequestMapping(value = "api/v1/payments")
 public class PaymentController {
     private PaymentCommandService paymentCommandService;
     private PaymentQueryService paymentQueryService;

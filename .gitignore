@@ -35,8 +35,6 @@ ehthumbs.db                     # Windows
 # Si tienes archivos .env locales que no deben ir al repo:
 .env
 .env.*
-application*.properties # No versiones archivos de propiedades que contengan secretos
-application*.yml        # No versiones archivos YAML que contengan secretos
 
 # Archivos de empaquetado (WARs, EARs)
 *.war
