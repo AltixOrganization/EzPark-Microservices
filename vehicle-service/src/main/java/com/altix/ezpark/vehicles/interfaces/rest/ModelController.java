@@ -30,7 +30,7 @@ public class ModelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ModelResource> updateModel(@PathVariable Long id, @Valid @RequestBody UpdateModelResource resource) {
+    public ResponseEntity<ModelResource> updateModel(@PathVariable("id") Long id, @Valid @RequestBody UpdateModelResource resource) {
         return modelCommandService.handle(UpdateModelCommandFromResourceAssembler.toCommandFromResource(id, resource))
                 .map(ModelResourceFromEntityAssembler::toResourceFromEntity)
                 .map(model -> ResponseEntity.status(HttpStatus.OK).body(model))
@@ -38,7 +38,7 @@ public class ModelController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteModel(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteModel(@PathVariable("id") Long id) {
         var deleteModelCommand = new DeleteModelCommand(id);
         modelCommandService.handle(deleteModelCommand);
         return ResponseEntity.noContent().build();

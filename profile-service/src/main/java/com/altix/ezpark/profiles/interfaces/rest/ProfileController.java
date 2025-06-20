@@ -57,7 +57,7 @@ public class ProfileController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfileResource> updateProfile(@Valid@PathVariable Long id, @RequestBody UpdateProfileResource updateProfileResource) {
+    public ResponseEntity<ProfileResource> updateProfile(@PathVariable("id") Long id,@Valid @RequestBody UpdateProfileResource updateProfileResource) {
         var updateProfileCommand = UpdateProfileCommandFromResource.toCommandFromResource(id, updateProfileResource);
         var updatedProfile = profileCommandService.handle(updateProfileCommand).map(ProfileResourceFromEntityAssembler::toResourceFromEntity);
         return updatedProfile.map(r -> new ResponseEntity<>(r, HttpStatus.OK))
@@ -65,7 +65,7 @@ public class ProfileController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteProfile(@PathVariable Long id){
+    public ResponseEntity<?> deleteProfile(@PathVariable("id") Long id){
         var deleteProfileCommand = new DeleteProfileCommand(id);
         profileCommandService.handle(deleteProfileCommand);
         return ResponseEntity.noContent().build();

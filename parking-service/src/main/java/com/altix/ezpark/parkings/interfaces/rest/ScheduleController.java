@@ -34,7 +34,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ScheduleResource> updateSchedule(@PathVariable Long id, @RequestBody UpdateScheduleResource updateScheduleResource){
+    public ResponseEntity<ScheduleResource> updateSchedule(@PathVariable("id") Long id, @RequestBody UpdateScheduleResource updateScheduleResource){
 
         var updateScheduleCommand = UpdateScheduleCommandFromResourceAssembler.toCommandFromResource(id, updateScheduleResource);
 
@@ -59,15 +59,15 @@ public class ScheduleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleResource> getScheduleById(@PathVariable Long id) {
+    public ResponseEntity<ScheduleResource> getScheduleById(@PathVariable("id") Long id) {
         var schedule = scheduleQueryService.handle(new GetScheduleByIdQuery(id));
         return schedule.map(ScheduleResourceFromEntityAssembler::toResourceFromEntity)
                 .map(resource -> new ResponseEntity<>(resource, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteSchedule(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteSchedule(@PathVariable("id") Long id) {
         var deleteScheduleCommand = new DeleteScheduleCommand(id);
         scheduleCommandService.handle(deleteScheduleCommand);
         return ResponseEntity.noContent().build();

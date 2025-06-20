@@ -57,7 +57,7 @@ public class ParkingController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ParkingResource> updateParking(@PathVariable Long id, @RequestBody UpdateParkingResource updateParkingResource) {
+    public ResponseEntity<ParkingResource> updateParking(@PathVariable("id") Long id, @RequestBody UpdateParkingResource updateParkingResource) {
         var updateParkingCommand = UpdateParkingCommandFromResourceAssembler.toCommandFromResource(id, updateParkingResource);
         var updatedParking = parkingCommandService.handle(updateParkingCommand);
 
@@ -65,15 +65,15 @@ public class ParkingController {
                 .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteParking(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteParking(@PathVariable("id") Long id) {
         var deleteParkingCommand = new DeleteParkingCommand(id);
         parkingCommandService.handle(deleteParkingCommand);
         return ResponseEntity.ok("Parking with given id successfully deleted");
     }
 
     @GetMapping("/{id}/details")
-    public ResponseEntity<ParkingResource> getParkingDetailsById(@PathVariable Long id) {
+    public ResponseEntity<ParkingResource> getParkingDetailsById(@PathVariable("id") Long id) {
         GetParkingByIdQuery query = new GetParkingByIdQuery(id);
         Optional<Parking> parking = parkingQueryService.handle(query);
 
@@ -82,7 +82,7 @@ public class ParkingController {
     }
 
     @GetMapping("/profile/{id}")
-    public ResponseEntity<List<ParkingResource>> getParkingListByProfileId(@PathVariable Long id) {
+    public ResponseEntity<List<ParkingResource>> getParkingListByProfileId(@PathVariable("id") Long id) {
         var profileId = new ProfileId(id);
         GetParkingListByProfileId query = new GetParkingListByProfileId(profileId);
         List<Parking> parkingList = parkingQueryService.handle(query);

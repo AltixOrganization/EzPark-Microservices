@@ -59,7 +59,7 @@ public class UsersController {
    * @see UserResource
    */
   @GetMapping(value = "/{userId}")
-  public ResponseEntity<UserResource> getUserById(@PathVariable Long userId) {
+  public ResponseEntity<UserResource> getUserById(@PathVariable("userId") Long userId) {
     var getUserByIdQuery = new GetUserByIdQuery(userId);
     var user = userQueryService.handle(getUserByIdQuery);
     if (user.isEmpty()) {

@@ -27,7 +27,7 @@ public class LocationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LocationResource> updateLocation(@PathVariable Long id, @RequestBody UpdateLocationResource updateLocationResource) {
+    public ResponseEntity<LocationResource> updateLocation(@PathVariable("id") Long id, @RequestBody UpdateLocationResource updateLocationResource) {
         var updateLocationCommand = UpdateLocationCommandFromResourceAssembler.toCommandFromResource(id, updateLocationResource);
         var updatedLocation = locationCommandService.handle(updateLocationCommand);
         var resource = LocationResourceFromEntityAssembler.toResourceFromEntity(updatedLocation.orElseThrow(() -> new IllegalArgumentException("Location not found")));

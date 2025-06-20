@@ -54,7 +54,7 @@ public class ReservationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ReservationResource> updateReservation(@PathVariable Long id, @RequestBody UpdateReservationResource updateReservationResource) {
+    public ResponseEntity<ReservationResource> updateReservation(@PathVariable("id") Long id, @RequestBody UpdateReservationResource updateReservationResource) {
         var updateReservationCommand = UpdateReservationCommandFromResourceAssembler.toCommandFromResource(id, updateReservationResource);
         var updatedReservation = reservationCommandService.handle(updateReservationCommand)
                 .map(ReservationResourceFromEntityAssembler::toResourceFromEntity);
@@ -62,7 +62,7 @@ public class ReservationController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @PutMapping("/{id}/status")
-    public ResponseEntity<ReservationResource> updateReservationStatus(@PathVariable Long id, @RequestBody UpdateStatusResource updateStatusResource){
+    public ResponseEntity<ReservationResource> updateReservationStatus(@PathVariable("id") Long id, @RequestBody UpdateStatusResource updateStatusResource){
         var updateStatusCommand = UpdateStatusCommandFromResourceAssembler.toCommandFromResource(id, updateStatusResource);
         var updatedStatus = reservationCommandService.handle(updateStatusCommand).map(ReservationResourceFromEntityAssembler::toResourceFromEntity);
         return updatedStatus.map(r -> new ResponseEntity<>(r,HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -77,7 +77,7 @@ public class ReservationController {
         return reservation.map(r -> new ResponseEntity<>(r, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @GetMapping("/host/{hostId}")
-    public ResponseEntity<List<ReservationResource>> getReservationsByHostId(@PathVariable Long hostId){
+    public ResponseEntity<List<ReservationResource>> getReservationsByHostId(@PathVariable("hostId") Long hostId){
         var getReservationsByHostIdQuery = new GetReservationsByHostIdQuery(hostId);
         var reservationList = reservationQueryService.handle(getReservationsByHostIdQuery)
                 .stream()
@@ -86,7 +86,7 @@ public class ReservationController {
         return new ResponseEntity<>(reservationList,HttpStatus.OK);
     }
     @GetMapping("/guest/{guestId}")
-    public ResponseEntity<List<ReservationResource>> getReservationsByGuestId(@PathVariable Long guestId){
+    public ResponseEntity<List<ReservationResource>> getReservationsByGuestId(@PathVariable("guestId") Long guestId){
         var getReservationsByGuestIdQuery = new GetReservationsByGuestIdQuery(guestId);
         var reservationList = reservationQueryService.handle(getReservationsByGuestIdQuery)
                 .stream()

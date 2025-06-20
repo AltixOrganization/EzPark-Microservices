@@ -42,7 +42,7 @@ public class BrandController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BrandWithModelListResource> updateBrand(@PathVariable Long id, @Valid @RequestBody UpdateBrandResource resource) {
+    public ResponseEntity<BrandWithModelListResource> updateBrand(@PathVariable("id") Long id, @Valid @RequestBody UpdateBrandResource resource) {
         return brandCommandService.handle(UpdateBrandCommandFromResourceAssembler.toCommandFromResource(id, resource))
                 .map(BrandResourceFromEntityAssembler::toResourceFromEntity)
                 .map(brand -> ResponseEntity.status(HttpStatus.OK).body(brand))
@@ -50,7 +50,7 @@ public class BrandController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBrand(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBrand(@PathVariable("id") Long id) {
         var deleteBrandCommand = new DeleteBrandCommand(id);
         brandCommandService.handle(deleteBrandCommand);
         return ResponseEntity.noContent().build();

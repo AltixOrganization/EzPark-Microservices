@@ -33,7 +33,7 @@ public class VehicleController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<VehicleResource> getVehicleById(@PathVariable Long id) {
+    public ResponseEntity<VehicleResource> getVehicleById(@PathVariable("id") Long id) {
         var getVehicleByIdQuery = new GetVehicleByIdQuery(id);
 
         var vehicle = vehicleQueryService.handle(getVehicleByIdQuery).map(VehicleResourceFromEntityAssembler::toResourceFromEntity);
@@ -42,8 +42,8 @@ public class VehicleController {
     }
 
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<List<VehicleResource>> getVehiclesByUserId(@PathVariable Long id) {
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<List<VehicleResource>> getVehiclesByUserId(@PathVariable("id") Long id) {
         var getVehiclesByUserIdQuery = new GetVehiclesByProfileIdQuery(id);
 
         var vehicleList = vehicleQueryService.handle(getVehiclesByUserIdQuery).stream().map(VehicleResourceFromEntityAssembler::toResourceFromEntity).toList();
@@ -53,7 +53,7 @@ public class VehicleController {
 
 
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<VehicleResource> createVehicle(@Validated @RequestBody CreateVehicleResource resource) throws Exception {
         return vehicleCommandService.handle(CreateVehicleCommandFromResourceAssembler.toCommandFromResource(resource))
                 .map(VehicleResourceFromEntityAssembler::toResourceFromEntity)
@@ -68,16 +68,16 @@ public class VehicleController {
         return new ResponseEntity<>(vehicleList,HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<VehicleResource> updateVehicle(@PathVariable Long id, @RequestBody UpdateVehicleResource updateVehicleResource) {
+    @PutMapping("/{id}")
+    public ResponseEntity<VehicleResource> updateVehicle(@PathVariable("id") Long id, @RequestBody UpdateVehicleResource updateVehicleResource) {
         var updateVehicleCommand = UpdateVehicleCommandFromResource.toCommandFromResource(id, updateVehicleResource);
         var updatedVehicle = vehicleCommandService.handle(updateVehicleCommand).map(VehicleResourceFromEntityAssembler::toResourceFromEntity);
         return updatedVehicle.map(r -> new ResponseEntity<>(r, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteVehicle(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteVehicle(@PathVariable("id") Long id){
         var deleteVehicleCommand = new DeleteVehicleCommand(id);
         vehicleCommandService.handle(deleteVehicleCommand);
         return ResponseEntity.noContent().build();
