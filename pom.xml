@@ -97,6 +97,9 @@
         <module>reservation-service</module>
         <module>payment-service</module>
         <module>iam-service</module>
+        <module>review-service</module>
+        <module>notification-service</module>
+        <module>review-api-contracts</module>
     </modules>
 
     <build>
