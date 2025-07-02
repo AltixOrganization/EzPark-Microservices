@@ -16,7 +16,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         ('ezpark_parkings_db'),
         ('ezpark_reservations_db'),
         ('ezpark_payments_db'),
-        ('ezpark_reviews_db')
+        ('ezpark_reviews_db'),
+        ('ezpark_notifications_db')
         -- Añade más bases de datos aquí si las necesitas
     ) AS d(datname)
     WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = d.datname)

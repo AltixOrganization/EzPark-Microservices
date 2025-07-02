@@ -2,7 +2,7 @@ package com.altix.ezpark.profiles.domain.model.commands;
 
 import java.time.LocalDate;
 
-public record CreateProfileCommand(String firstName, String lastName, LocalDate birthDate, Long userId) {
+public record CreateProfileCommand(String firstName, String lastName, LocalDate birthDate, String email,Long userId) {
     public CreateProfileCommand {
         //Name starts capital letter and no spaces
         if (firstName == null || !firstName.matches("^[A-Z][a-zA-Z]*$")) {

@@ -1,9 +1,11 @@
-package com.altix.ezpark.profiles.interfaces.rest.resources;
+package com.altix.ezpark.profiles.application.dtos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record ProfileResource(
+
+public record ProfileResponse(
+        String correlationId,
         Long id,
         String firstName,
         String lastName,

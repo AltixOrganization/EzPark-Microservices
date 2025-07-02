@@ -1,9 +1,8 @@
 package com.altix.ezpark.profiles.interfaces.rest.resources;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 
 public record CreateProfileResource(
@@ -20,6 +19,10 @@ public record CreateProfileResource(
         @NotNull(message = "{profile.birthDate.not.null}")
         @Past(message = "{profile.birthDate.past}")
         LocalDate birthDate,
+
+        @NotBlank
+        @Email
+        String email,
 
         @NotNull(message = "{profile.userId.not.null}")
         Long userId

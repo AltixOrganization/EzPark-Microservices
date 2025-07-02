@@ -1,9 +1,6 @@
 package com.altix.ezpark.reservations.application.internal.commandservices;
 
-import com.altix.ezpark.reservations.application.internal.outboundservices.acl.ParkingContextFacade;
-import com.altix.ezpark.reservations.application.internal.outboundservices.acl.ProfileContextFacade;
-import com.altix.ezpark.reservations.application.internal.outboundservices.acl.ScheduleContextFacade;
-import com.altix.ezpark.reservations.application.internal.outboundservices.acl.VehiclesContextFacade;
+import com.altix.ezpark.reservations.application.internal.outboundservices.acl.*;
 import com.altix.ezpark.reservations.domain.model.aggregates.Reservation;
 import com.altix.ezpark.reservations.domain.model.commands.CreateReservationCommand;
 import com.altix.ezpark.reservations.domain.model.commands.UpdateReservationCommand;
@@ -28,6 +25,7 @@ public class ReservationCommandServiceImpl implements ReservationCommandService 
     private final VehiclesContextFacade vehiclesContextFacade;
     private final ParkingContextFacade parkingContextFacade;
     private final ScheduleContextFacade scheduleContextFacade;
+    private final NotificationContextFacade notificationContextFacade;
 
     @Transactional
     @Override
@@ -119,6 +117,16 @@ public class ReservationCommandServiceImpl implements ReservationCommandService 
                 scheduleContextFacade.markScheduleAsUnavailable(
                         statusToUpdate.getScheduleId().scheduleId());
             }
+            notificationContextFacade.notifyReservationStatusChanged(
+                    statusToUpdate.getId(),
+                    statusToUpdate.getStatus().name(),
+                    command.status().name(),
+                    statusToUpdate.getGuestId().guestId(),
+                    statusToUpdate.getHostId().hostId(),
+                    statusToUpdate.getParkingId().parkingId(),
+                    statusToUpdate.getScheduleId().scheduleId(),
+                    statusToUpdate.getReservationDate()
+            );
             var updatedStatus = reservationRepository.save(statusToUpdate.updatedStatus(command));
             return Optional.of(updatedStatus);
         }catch (Exception e){

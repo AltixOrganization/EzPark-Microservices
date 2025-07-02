@@ -3,6 +3,7 @@ package com.altix.ezpark.profiles.infrastructure.messaging;
 
 import com.altix.ezpark.iam.application.dtos.UserSignedUpEvent;
 import com.altix.ezpark.iam.infrastructure.messaging.IamKafkaConfig;
+import com.altix.ezpark.profiles.application.dtos.ProfileResponse;
 import com.altix.ezpark.profiles.application.dtos.ProfileValidationRequest;
 import com.altix.ezpark.profiles.application.dtos.ProfileValidationResponse;
 import com.altix.ezpark.profiles.domain.model.commands.CreateProfileCommand;
@@ -10,6 +11,7 @@ import com.altix.ezpark.profiles.domain.model.queries.GetProfileByIdQuery;
 import com.altix.ezpark.profiles.domain.services.ProfileCommandService;
 import com.altix.ezpark.profiles.domain.services.ProfileQueryService;
 import com.altix.ezpark.profiles.infrastructure.persistence.jpa.repositories.ProfileRepository;
+import com.altix.ezpark.profiles.interfaces.rest.resources.ProfileResource;
 import com.altix.ezpark.shared.infrastructure.messaging.KafkaEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -70,6 +72,7 @@ public class ProfileKafkaListener {
                     event.firstName(),
                     event.lastName(),
                     event.birthDate(),
+                    event.email(),
                     event.userId()
             );
 
@@ -84,6 +87,30 @@ public class ProfileKafkaListener {
         } catch (Exception e) {
             log.error("[Saga] Fallo CRÍTICO al crear el perfil para userId {}. Causa: {}",
                     event.userId(), e.getMessage(), e);
+        }
+    }
+
+    @KafkaListener(
+            topics = ProfileKafkaConfig.TOPIC_PROFILE_COMMANDS_REQUEST,
+            groupId = "${profiles.kafka.consumer.group-id:profile-commands-group}"
+    )
+    public void handleProfileCommands(ProfileValidationRequest request) {
+        var getProfileByIdQuery = new GetProfileByIdQuery(request.profileId());
+
+        var profile = profileQueryService.handle(getProfileByIdQuery);
+        if (profile.isPresent()) {
+            var profileResource = new ProfileResponse(
+                    request.correlationId(),
+                    profile.get().getId(),
+                    profile.get().getFirstName(),
+                    profile.get().getLastName(),
+                    profile.get().getBirthDate(),
+                    profile.get().getUserId().userId(),
+                    profile.get().getEmail(),
+                    profile.get().getCreatedAt(),
+                    profile.get().getUpdatedAt()
+            );
+            kafkaEventPublisher.publish(ProfileKafkaConfig.TOPIC_PROFILE_COMMANDS_RESPONSE, profileResource);
         }
     }
 }

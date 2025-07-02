@@ -11,6 +11,7 @@ public class ProfileResourceFromEntityAssembler {
                 entity.getLastName(),
                 entity.getBirthDate(),
                 entity.getUserId().userIdAsPrimitive(),
+                entity.getEmail(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
         );

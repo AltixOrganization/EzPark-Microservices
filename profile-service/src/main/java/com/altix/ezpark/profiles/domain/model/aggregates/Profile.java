@@ -6,6 +6,9 @@ import com.altix.ezpark.profiles.domain.model.valueobject.UserId;
 import com.altix.ezpark.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +25,10 @@ public class Profile extends AuditableAbstractAggregateRoot<Profile> {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
+    @NotBlank
+    @Email
+    @Column(unique = true)
+    private String email;
 
     @Embedded
     private UserId userId;
@@ -35,6 +42,7 @@ public class Profile extends AuditableAbstractAggregateRoot<Profile> {
         this.firstName = command.firstName();
         this.lastName = command.lastName();
         this.birthDate = command.birthDate();
+        this.email = command.email();
         this.userId = new UserId(command.userId());
     }
     public Profile updatedProfile(UpdateProfileCommand command) {
