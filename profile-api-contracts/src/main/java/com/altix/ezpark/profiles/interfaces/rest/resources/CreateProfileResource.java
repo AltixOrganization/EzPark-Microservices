@@ -1,6 +1,5 @@
 package com.altix.ezpark.profiles.interfaces.rest.resources;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;

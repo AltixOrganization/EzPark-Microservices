@@ -11,7 +11,6 @@ import com.altix.ezpark.profiles.domain.model.queries.GetProfileByIdQuery;
 import com.altix.ezpark.profiles.domain.services.ProfileCommandService;
 import com.altix.ezpark.profiles.domain.services.ProfileQueryService;
 import com.altix.ezpark.profiles.infrastructure.persistence.jpa.repositories.ProfileRepository;
-import com.altix.ezpark.profiles.interfaces.rest.resources.ProfileResource;
 import com.altix.ezpark.shared.infrastructure.messaging.KafkaEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

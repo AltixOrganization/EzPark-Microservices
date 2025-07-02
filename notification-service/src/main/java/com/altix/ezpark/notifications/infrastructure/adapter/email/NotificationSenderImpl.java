@@ -3,7 +3,6 @@ package com.altix.ezpark.notifications.infrastructure.adapter.email;
 import com.altix.ezpark.notifications.application.internal.outboundservices.NotificationSender;
 import com.altix.ezpark.notifications.application.internal.outboundservices.acl.ParkingContextFacade;
 import com.altix.ezpark.notifications.application.internal.outboundservices.acl.ProfileContextFacade;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
