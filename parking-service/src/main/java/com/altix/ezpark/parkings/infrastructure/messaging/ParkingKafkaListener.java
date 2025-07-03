@@ -233,6 +233,7 @@ public class ParkingKafkaListener {
             }
 
             var parking = parkingOptional.get();
+
             var schedule = scheduleOptional.get();
 
             if (!schedule.getParking().getId().equals(parking.getId())) {
@@ -245,6 +246,7 @@ public class ParkingKafkaListener {
             // Crear respuesta exitosa
             var response = new ParkingForNotificationResponse(
                     request.correlationId(),
+                    parking.getProfileId().profileId(),
                     parking.getPhone(),
                     parking.getLocation().getAddress(),
                     parking.getLocation().getNumDirection(),
@@ -284,7 +286,7 @@ public class ParkingKafkaListener {
     private void publishNotificationError(ParkingQueryRequest request, String errorMessage) {
         var errorResponse = new ParkingForNotificationResponse(
                 request.correlationId(),
-                null, null, null, null, null, null, null, null, null,
+                null,null, null, null, null, null, null, null, null, null,
                 false,
                 errorMessage
         );

@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 public record ParkingForNotificationResponse(
         String correlationId,
+        Long parkingProfileId,
         String phone,
         String address,
         String numDirection,

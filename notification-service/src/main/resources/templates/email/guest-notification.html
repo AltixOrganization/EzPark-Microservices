@@ -1,0 +1,230 @@
+<!-- filepath: notification-service/src/main/resources/templates/email/guest-notification.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualización de tu Reserva EzPark</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header .emoji {
+            font-size: 48px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .content {
+            padding: 30px 25px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 10px 0 20px 0;
+        }
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .details-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 5px 0;
+        }
+        .detail-icon {
+            font-size: 18px;
+            margin-right: 12px;
+            width: 25px;
+        }
+        .detail-text {
+            flex: 1;
+            font-size: 15px;
+        }
+        .detail-value {
+            font-weight: 600;
+            color: #495057;
+        }
+        .action-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        .action-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        .action-box p {
+            margin: 5px 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 13px;
+            color: #6c757d;
+        }
+        .brand {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 20px 0;
+            border-radius: 1px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            .content {
+                padding: 20px 15px;
+            }
+            .header {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <span class="emoji">🅿️</span>
+        <h1>EzPark</h1>
+        <p th:text="|¡Hola ${guestName}!|" style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;"></p>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Status Message -->
+        <div th:text="${statusMessage}" style="font-size: 18px; margin-bottom: 15px;"></div>
+
+        <div th:class="|status-badge status-${statusClass}|" th:text="${statusText}"></div>
+
+        <div class="divider"></div>
+
+        <!-- Reservation Details -->
+        <div class="details-card">
+            <h3 style="margin-top: 0; color: #495057; font-size: 18px;">📍 Detalles de tu Reserva</h3>
+
+            <div class="detail-item">
+                <span class="detail-icon">🆔</span>
+                <span class="detail-text">Reserva:</span>
+                <span class="detail-value" th:text="|#${reservationId}|"></span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span class="detail-text">Fecha:</span>
+                <span class="detail-value" th:text="${reservationDate}"></span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-icon">⏰</span>
+                <span class="detail-text">Horario:</span>
+                <span class="detail-value" th:text="|${startTime} - ${endTime}|"></span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-icon">📍</span>
+                <span class="detail-text">Ubicación:</span>
+                <span class="detail-value" th:text="|${address} ${numDirection}, ${district}, ${city}|"></span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-icon">📞</span>
+                <span class="detail-text">Contacto:</span>
+                <span class="detail-value" th:text="${phone}"></span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-icon">👤</span>
+                <span class="detail-text">Propietario:</span>
+                <span class="detail-value" th:text="|${hostFirstName} ${hostLastName}|"></span>
+            </div>
+        </div>
+
+        <!-- Action Message -->
+        <div class="action-box">
+            <h3 th:text="${actionTitle}"></h3>
+            <div th:each="action : ${actionMessages}">
+                <p th:text="${action}"></p>
+            </div>
+        </div>
+
+        <!-- Footer Message -->
+        <div style="text-align: center; margin-top: 30px;">
+            <div th:text="${footerTip}" style="background: #e9ecef; padding: 15px; border-radius: 8px; font-style: italic; color: #495057;"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="brand">💙 ¡Gracias por confiar en EzPark!</div>
+        <div class="divider" style="margin: 15px auto; width: 100px;"></div>
+        <p>📱 Descarga nuestra app para gestionar tus reservas más fácilmente</p>
+        <p>❓ ¿Necesitas ayuda? Contáctanos en <strong>soporte@ezpark.com</strong></p>
+        <p style="margin-top: 15px; font-size: 12px;">🤖 Este es un email automático, por favor no responder directamente</p>
+    </div>
+</div>
+</body>
+</html>
