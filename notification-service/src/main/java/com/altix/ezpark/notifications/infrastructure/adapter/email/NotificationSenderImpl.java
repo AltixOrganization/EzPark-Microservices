@@ -80,7 +80,6 @@ public class NotificationSenderImpl implements NotificationSender {
                 actualGuest = profile1;
             }
 
-            // 👈 ENVIAR EMAILS HTML CON TEMPLATES
             sendEmailToUser(UserRole.GUEST, actualGuest, actualHost, parkingInfo,
                     previousStatus, newStatus, reservationDate, reservationId);
 
@@ -96,7 +95,6 @@ public class NotificationSenderImpl implements NotificationSender {
         }
     }
 
-    // 👈 MÉTODO UNIFICADO PARA ENVIAR EMAILS HTML
     private void sendEmailToUser(
             UserRole userRole,
             ProfileResponse recipient,
@@ -114,7 +112,6 @@ public class NotificationSenderImpl implements NotificationSender {
             helper.setFrom(senderEmail);
             helper.setTo(recipient.email());
 
-            // Almacenar el subject en una variable
             String subject = emailTemplateService.getSubject(
                     userRole, newStatus, parkingInfo.district()
             );
@@ -134,7 +131,6 @@ public class NotificationSenderImpl implements NotificationSender {
             helper.setText(htmlContent, true);
             javaMailSender.send(message);
 
-            // Usar la variable subject en lugar de helper.getSubject()
             log.info("Email HTML enviado a {} ({}): {}",
                     recipient.email(), userRole, subject);
 
@@ -143,9 +139,6 @@ public class NotificationSenderImpl implements NotificationSender {
                     recipient.email(), userRole, e.getMessage(), e);
         }
     }
-
-    // 👇 MANTENER TUS MÉTODOS EXISTENTES PARA BACKWARD COMPATIBILITY O FALLBACK
-    // (Puedes eliminarlos después si no los necesitas)
 
     private String getGuestStatusMessage(String status, Long reservationId) {
         return switch (status.toUpperCase()) {

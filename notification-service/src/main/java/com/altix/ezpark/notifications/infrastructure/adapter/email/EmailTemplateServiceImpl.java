@@ -37,7 +37,6 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
     ) {
         Context context = new Context();
 
-        // 👈 USAR TUS MÉTODOS EXISTENTES PARA GENERAR DATOS
         setupCommonData(context, parkingInfo, reservationDate, reservationId, newStatus);
 
         return switch (userRole) {
@@ -99,7 +98,6 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
         context.setVariable("showEarnings", "COMPLETED".equalsIgnoreCase(newStatus));
     }
 
-    // 👇 REPLICAR TUS MÉTODOS AQUÍ O MOVERLOS A UNA CLASE UTIL
 
     private String getGuestStatusMessage(String status, Long reservationId) {
         return switch (status.toUpperCase()) {
@@ -121,8 +119,6 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
         };
     }
 
-    // ... resto de métodos auxiliares (copiar de tu código actual)
-
     private String getStatusInSpanish(String status) {
         return switch (status.toUpperCase()) {
             case "CONFIRMED" -> "CONFIRMADA";
@@ -137,7 +133,6 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
         return time != null ? time.format(TIME_FORMATTER) : "N/A";
     }
 
-    // Métodos auxiliares adicionales para templates...
     private String getGuestActionTitle(String status) {
         return switch (status.toUpperCase()) {
             case "CONFIRMED" -> "🚗 ¿Qué sigue?";
