@@ -4,7 +4,10 @@ import com.altix.ezpark.notifications.application.internal.outboundservices.Noti
 import com.altix.ezpark.notifications.application.internal.outboundservices.acl.ParkingContextFacade;
 import com.altix.ezpark.notifications.application.internal.outboundservices.acl.ProfileContextFacade;
 import com.altix.ezpark.notifications.application.internal.outboundservices.EmailTemplateService;
+import com.altix.ezpark.notifications.domain.model.commands.CreateEmailLogCommand;
+import com.altix.ezpark.notifications.domain.model.valueobjects.SendStatus;
 import com.altix.ezpark.notifications.domain.model.valueobjects.UserRole;
+import com.altix.ezpark.notifications.domain.service.EmailLogCommandService;
 import com.altix.ezpark.parkings.application.dtos.ParkingForNotificationResponse;
 import com.altix.ezpark.profiles.application.dtos.ProfileResponse;
 import jakarta.mail.internet.MimeMessage;
@@ -15,7 +18,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Service
 @Slf4j
@@ -25,6 +27,7 @@ public class NotificationSenderImpl implements NotificationSender {
     private final ParkingContextFacade parkingContextFacade;
     private final EmailTemplateService emailTemplateService;
     private final JavaMailSender javaMailSender;
+    private final EmailLogCommandService emailLogCommandService;
 
     @Value("${notification.sender.email}")
     private String senderEmail;
@@ -32,11 +35,12 @@ public class NotificationSenderImpl implements NotificationSender {
     public NotificationSenderImpl(
             ProfileContextFacade profileContextFacade,
             ParkingContextFacade parkingContextFacade, EmailTemplateService emailTemplateService,
-            JavaMailSender javaMailSender) {
+            JavaMailSender javaMailSender, EmailLogCommandService emailLogCommandService) {
         this.profileContextFacade = profileContextFacade;
         this.parkingContextFacade = parkingContextFacade;
         this.emailTemplateService = emailTemplateService;
         this.javaMailSender = javaMailSender;
+        this.emailLogCommandService = emailLogCommandService;
     }
 
     @Override
@@ -130,6 +134,7 @@ public class NotificationSenderImpl implements NotificationSender {
 
             helper.setText(htmlContent, true);
             javaMailSender.send(message);
+            logEmailSent(recipient.email(), subject, reservationId);
 
             log.info("Email HTML enviado a {} ({}): {}",
                     recipient.email(), userRole, subject);
@@ -137,60 +142,23 @@ public class NotificationSenderImpl implements NotificationSender {
         } catch (Exception e) {
             log.error("Error enviando email HTML a {} ({}): {}",
                     recipient.email(), userRole, e.getMessage(), e);
+            logEmailFailed(recipient.email(), emailTemplateService.getSubject(userRole, newStatus, parkingInfo.district()),
+                    reservationId, e.getMessage());
         }
     }
 
-    private String getGuestStatusMessage(String status, Long reservationId) {
-        return switch (status.toUpperCase()) {
-            case "CONFIRMED" -> String.format("🎉 ¡Excelente noticia! Tu reserva #%d ha sido **CONFIRMADA**.", reservationId);
-            case "CANCELLED" -> String.format("😔 Tu reserva #%d ha sido **CANCELADA**.", reservationId);
-            case "PENDING" -> String.format("⏳ Tu reserva #%d está **PENDIENTE** de confirmación.", reservationId);
-            case "COMPLETED" -> String.format("✅ Tu reserva #%d se ha **COMPLETADO** exitosamente.", reservationId);
-            default -> String.format("ℹ️ El estado de tu reserva #%d ha sido actualizado.", reservationId);
-        };
+    private void logEmailSent(String recipient, String subject, Long reservationId) {
+        CreateEmailLogCommand command = new CreateEmailLogCommand(
+                recipient, subject, SendStatus.SENT, reservationId, null
+        );
+        emailLogCommandService.handle(command);
     }
 
-    private String getHostStatusMessage(String status, String guestName, Long reservationId) {
-        return switch (status.toUpperCase()) {
-            case "CONFIRMED" -> String.format("✅ Has **CONFIRMADO** la reserva de %s (Reserva #%d).", guestName, reservationId);
-            case "CANCELLED" -> String.format("❌ La reserva de %s ha sido **CANCELADA** (Reserva #%d).", guestName, reservationId);
-            case "PENDING" -> String.format("📬 **Nueva solicitud** de reserva de %s (Reserva #%d).", guestName, reservationId);
-            case "COMPLETED" -> String.format("🏁 La reserva de %s se ha **COMPLETADO** (Reserva #%d).", guestName, reservationId);
-            default -> String.format("📄 Actualización en la reserva de %s (Reserva #%d).", guestName, reservationId);
-        };
-    }
-
-    private String getGuestActionMessage(String status, String hostName) {
-        return switch (status.toUpperCase()) {
-            case "CONFIRMED" -> String.format("🚗 Llega puntualmente y contacta a %s si tienes dudas.", hostName);
-            case "CANCELLED" -> "🔍 Busca otros espacios disponibles en tu zona.";
-            case "PENDING" -> String.format("⏰ %s revisará tu solicitud pronto.", hostName);
-            case "COMPLETED" -> "⭐ ¡Nos encantaría conocer tu experiencia! Califica al propietario.";
-            default -> "📞 Si tienes preguntas, contacta al propietario.";
-        };
-    }
-
-    private String getHostActionMessage(String status, String guestName) {
-        return switch (status.toUpperCase()) {
-            case "CONFIRMED" -> String.format("🏠 Prepárate para recibir a %s. Asegúrate de que el espacio esté libre.", guestName);
-            case "CANCELLED" -> "📈 Tu espacio está nuevamente disponible para otras reservas.";
-            case "PENDING" -> "⚡ Revisa los detalles y confirma o rechaza según tu disponibilidad.";
-            case "COMPLETED" -> "💰 ¡Reserva completada! El pago se procesará automáticamente.";
-            default -> "📧 Mantente en contacto con el huésped si es necesario.";
-        };
-    }
-
-    private String getStatusInSpanish(String status) {
-        return switch (status.toUpperCase()) {
-            case "CONFIRMED" -> "CONFIRMADA";
-            case "CANCELLED" -> "CANCELADA";
-            case "PENDING" -> "PENDIENTE";
-            case "COMPLETED" -> "COMPLETADA";
-            default -> status.toUpperCase();
-        };
-    }
-
-    private String formatTime(java.time.LocalTime time) {
-        return time != null ? time.format(DateTimeFormatter.ofPattern("HH:mm")) : "N/A";
+    private void logEmailFailed(String recipient, String subject,
+                                Long reservationId, String errorMessage) {
+        CreateEmailLogCommand command = new CreateEmailLogCommand(
+                recipient, subject, SendStatus.FAILED, reservationId, errorMessage
+        );
+        emailLogCommandService.handle(command);
     }
 }

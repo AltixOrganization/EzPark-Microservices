@@ -84,6 +84,11 @@
         </dependency>
         <dependency>
             <groupId>com.altix.ezpark</groupId>
+            <artifactId>notification-api-contracts</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.altix.ezpark</groupId>
             <artifactId>reservation-api-contracts</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
