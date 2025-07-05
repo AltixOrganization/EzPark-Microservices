@@ -1,12 +1,20 @@
-# Usa una imagen base de OpenJDK (Java 17) para tus aplicaciones Spring Boot
+FROM maven:3.8.5-openjdk-17-slim AS build
+
+WORKDIR /app
+
+COPY . .
+
+RUN mvn -pl config-server -am clean package -DskipTests
+
 FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY target/config-server-0.0.1-SNAPSHOT.jar app.jar
-
 RUN apt-get update && apt-get install -y curl --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /app/config-server/target/*.jar app.jar
 
 EXPOSE 8888
 
+# Comando para iniciar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
