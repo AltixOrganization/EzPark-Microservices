@@ -69,7 +69,7 @@ public class ReviewController {
     }
 
     @GetMapping("/parking/{parkingId}")
-    public ResponseEntity<List<ReviewResource>> getReviewsByParkingId(@PathVariable Long parkingId) {
+    public ResponseEntity<List<ReviewResource>> getReviewsByParkingId(@PathVariable("parkingId") Long parkingId) {
         var getReviewsByParkingIdQuery = new GetAllReviewsByParkingIdQuery(parkingId);
         var reviews = reviewQueryService.handle(getReviewsByParkingIdQuery)
                 .stream()
@@ -79,7 +79,7 @@ public class ReviewController {
     }
 
     @GetMapping("/profile/{profileId}")
-    public ResponseEntity<List<ReviewResource>> getReviewsByProfileId(@PathVariable Long profileId) {
+    public ResponseEntity<List<ReviewResource>> getReviewsByProfileId(@PathVariable("profileId") Long profileId) {
         var getReviewsByProfileIdQuery = new GetAllReviewsByProfileIdQuery(profileId);
         var reviews = reviewQueryService.handle(getReviewsByProfileIdQuery)
                 .stream()
