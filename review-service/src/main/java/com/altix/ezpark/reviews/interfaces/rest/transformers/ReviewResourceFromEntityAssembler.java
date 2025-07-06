@@ -9,8 +9,8 @@ public class ReviewResourceFromEntityAssembler {
                 entity.getId(),
                 entity.getRating(),
                 entity.getComment(),
-                entity.getProfileId().profileId(),
                 entity.getParkingId().parkingId(),
+                entity.getProfileId().profileId(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
         );
