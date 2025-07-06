@@ -9,8 +9,8 @@ public class CreateReviewCommandFromResourceAssembler {
         return new CreateReviewCommand(
                 resource.rating(),
                 resource.comment(),
-                resource.profileId(),
-                resource.parkingId()
+                resource.parkingId(),
+                resource.profileId()
         );
     }
 }

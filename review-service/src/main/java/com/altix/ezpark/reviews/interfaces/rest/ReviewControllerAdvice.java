@@ -1,4 +1,4 @@
-package com.altix.ezpark.reviews.interfaces.rest.transformers;
+package com.altix.ezpark.reviews.interfaces.rest;
 
 import com.altix.ezpark.interfaces.rest.resources.ErrorResource;
 import com.altix.ezpark.reviews.domain.model.exceptions.ParkingNotFoundException;
